@@ -1,0 +1,67 @@
+[0123/193958.863:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+<tbody>
+                                            <tr>
+                                                <td>B001</td>
+                                                <td>Basis Data</td>
+                                                <td>Hanifah Widjayanti</td>
+                                                <td>CV Gramedia Indonesia</td>
+                                                <td>50</td>
+                                                <td><a class="btn btn-primary" href="detail.html">Detail</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>B002</td>
+                                                <td>Sejarah Indonesia</td>
+                                                <td>Hanifah Widjayanti</td>
+                                                <td>CV Surya Kentjana</td>
+                                                <td>50</td>
+                                                <td><a class="btn btn-primary" href="detail.html">Detail</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>B003</td>
+                                                <td>What is Artificial Intellegence?</td>
+                                                <td>Najwa Kirana</td>
+                                                <td>CV Rameda Wijaya</td>
+                                                <td>25</td>
+                                                <td><a class="btn btn-primary" href="detail.html">Detail</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>B004</td>
+                                                <td>Dunia itu Luas</td>
+                                                <td>Naufal Purnama</td>
+                                                <td>CV Gramedia Indonesia</td>
+                                                <td>30</td>
+                                                <td><a class="btn btn-primary" href="detail.html">Detail</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>B005</td>
+                                                <td>Belajar Aritmatika dan Logika</td>
+                                                <td>Naufal Purnama</td>
+                                                <td>CV Gramedia Indonesia</td>
+                                                <td>25</td>
+                                                <td><a class="btn btn-primary" href="detail.html">Detail</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>B006</td>
+                                                <td>How to be an Enterpreneur</td>
+                                                <td>Jimmy Rens</td>
+                                                <td>CV Cahaya Impian</td>
+                                                <td>15</td>
+                                                <td><a class="btn btn-primary" href="detail.html">Detail</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>B007</td>
+                                                <td>Be a British is Easy!</td>
+                                                <td>Jimmy Rens</td>
+                                                <td>CV Cahaya Impian</td>
+                                                <td>20</td>
+                                                <td><a class="btn btn-primary" href="detail.html">Detail</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>B008</td>
+                                                <td>Ngoding JavaScript</td>
+                                                <td>Najwa Kirana</td>
+                                                <td>CV Rameda Wijaya</td>
+                                                <td>15</td>
+                                                <td><a class="btn btn-primary" href="detail.html">Detail</a></td>
+                                            </tr>
+                                        </tbody>
