@@ -4,10 +4,7 @@
 if (!isset($_SESSION['username'])) {
     header("Location: admin.php");
 }
-
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,54 +14,52 @@ if (!isset($_SESSION['username'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link href="../img/logo/perpus2.png" rel="icon">
-    <title>Perpustakaan | Administrator</title>
+    <link href="../img/logo/library.png" rel="icon">
+    <title>Library | Administrator</title>
     <link href="../bootstrap/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="../bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="../bootstrap/css/ruang-admin.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
     <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css">
     <link href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
-    
-   
 </head>
 
 <body id="page-top">
     
     <div id="wrapper">
         <!-- Sidebar -->
-        <ul class="navbar-nav sidebar  sidebar-light accordion" id="accordionSidebar">
+        <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
                 <div class="sidebar-brand-icon">
-                    <img src="../img/logo/perpus.png">
+                    <img src="../img/logo/library.png">
                 </div>
-                <div class="sidebar-brand-text mx-3">E-Librarie</div>
+                <div class="sidebar-brand-text mx-3">E-Library</div>
             </a>
             <hr class="sidebar-divider my-0">
             <li class="nav-item">
                 <a class="nav-link" href="index.php">
                     <i class="fas fa-fw fa-school"></i>
-                    <span>Menu Utama</span></a>
+                    <span>Main Menu</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="buku.php">
+                <a class="nav-link" href="books.php">
                     <i class="fas fa-fw fa-book"></i>
-                    <span>Pengelolaan Buku</span></a>
+                    <span>Book Management</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="member.php">
+                <a class="nav-link" href="members.php">
                     <i class="fas fa-fw fa-user"></i>
-                    <span>Pengelolaan Member</span></a>
+                    <span>Member Management</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="pinjam.php">
+                <a class="nav-link" href="borrow.php">
                     <i class="fas fa-fw fa-cart-plus"></i>
-                    <span>Data Peminjaman</span></a>
+                    <span>Borrowing Data</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="denda.php">
+                <a class="nav-link" href="fines.php">
                     <i class="fas fa-fw fa-money-check-alt"></i>
-                    <span>Proses Denda</span></a>
+                    <span>Fine Processing</span></a>
             </li>
             <hr class="sidebar-divider">
             <div class="sidebar-heading">LOGOUT</div>
@@ -88,16 +83,15 @@ if (!isset($_SESSION['username'])) {
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle " href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="img-profile rounded-circle" src="../img/foto/<?= $_SESSION['foto'];?>" style="max-width: 60px">
-
-                                <span class="ml-2 d-none d-lg-inline text-white small" id="userName"><?php echo $_SESSION['nama'];?></span>
+                                <img class="img-profile rounded-circle" src="../img/photo/<?= $_SESSION['photo'];?>" style="max-width: 60px">
+                                <span class="ml-2 d-none d-lg-inline text-white small" id="userName"><?php echo $_SESSION['name'];?></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal" data-target="#dataDiri" id="#modalCenter">
-                                    <i class="fa fa-user-circle fa-sm fa-fw mr-2 text-gray-400"></i> Data Diri
+                                <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal" data-target="#profileModal" id="#modalCenter">
+                                    <i class="fa fa-user-circle fa-sm fa-fw mr-2 text-gray-400"></i> Profile
                                 </a>
                                 <a class="dropdown-item" href="admin.php" >
-                                    <i class="fa fa-user-alt fa-sm fa-fw mr-2 text-gray-400"></i> Data Admin
+                                    <i class="fa fa-user-alt fa-sm fa-fw mr-2 text-gray-400"></i> Admin Data
                                 </a>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logout">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Logout
@@ -115,19 +109,19 @@ if (!isset($_SESSION['username'])) {
                         <div class="col-lg-12">
                             <div class="card mb-4">
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h4 class="m-0 font-weight-bold text-primary">Pengelola Admin</h4>
+                                    <h4 class="m-0 font-weight-bold text-primary">Admin Management</h4>
                                 </div>
                                 <div class="table-responsive p-3">
                                     <table class="table align-items-center table-flush" id="dataTable">
                                         <thead class="thead-light">
                                             <tr>
-                                                <th>Foto Profil</th>
-                                                <th>Nama</th>
+                                                <th>Profile Photo</th>
+                                                <th>Name</th>
                                                 <th>Username</th>
-                                                <th>E-Mail</th>
-                                                <th>No Telepon</th>
+                                                <th>Email</th>
+                                                <th>Phone Number</th>
                                                 <th>Level</th>
-                                                <th>Pengaturan</th>
+                                                <th>Settings</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -136,17 +130,16 @@ if (!isset($_SESSION['username'])) {
                                             while($admin = mysqli_fetch_assoc($query)) {
                                             ?>
                                             <tr>
-                                                <td><img class="img-profile rounded-circle online" src="../img/foto/<?= $admin["foto"] ?>" alt="Foto <?= $admin["nama"];?>" height="60px" width="80px"></td>
-                                                <td><?= $admin["nama"] ?></td>
+                                                <td><img class="img-profile rounded-circle online" src="../img/photo/<?= $admin["photo"] ?>" alt="Photo <?= $admin["name"];?>" height="60px" width="80px"></td>
+                                                <td><?= $admin["name"] ?></td>
                                                 <td><?= $admin["username"] ?></td>
                                                 <td><?= $admin["email"] ?></td>
-                                                <td><?= $admin["telepon"] ?></td>
+                                                <td><?= $admin["phone"] ?></td>
                                                 <td><?= $admin["level"] ?></td>
-                                                    
-                                                <td><a href='#' class='btn btn-sm  btn-success' id="tmblUbah" data-toggle='modal'  data-target='#ubahModal' data-nama="<?= $admin['nama'];?>" 
-                                                data-username="<?= $admin['username'];?>" data-password="<?= $admin['password'];?>"  data-email="<?= $admin['email'];?>" data-notelp="<?= $admin['telepon'];?>" 
-                                                data-level="<?= $admin['level'];?>" data-foto="<?= $admin['foto'];?>" ><i class="fa fa-edit"></i></a>
-                                                <a class="btn btn-sm  btn-danger" href="fungsi/hapus.php?nama=<?= $admin["nama"]?>" onClick="return confirm('Hapus Data User dengan nama <?= $admin ['nama']?>??')" ><i class="fa fa-trash"></i></a>
+                                                <td><a href='#' class='btn btn-sm btn-success' id="editButton" data-toggle='modal' data-target='#editModal' data-name="<?= $admin['name'];?>" 
+                                                data-username="<?= $admin['username'];?>" data-password="<?= $admin['password'];?>" data-email="<?= $admin['email'];?>" data-phone="<?= $admin['phone'];?>" 
+                                                data-level="<?= $admin['level'];?>" data-photo="<?= $admin['photo'];?>" ><i class="fa fa-edit"></i></a>
+                                                <a class="btn btn-sm btn-danger" href="functions/delete.php?name=<?= $admin["name"]?>" onClick="return confirm('Delete user data with name <?= $admin ['name']?>??')" ><i class="fa fa-trash"></i></a>
                                                 </td>
                                             <?php } ?>
                                             </tr>
@@ -156,69 +149,68 @@ if (!isset($_SESSION['username'])) {
                             </div>
                         </div>
                     </div>
-                        <!-- Modal Ubah-->
-                        <div class="modal fade" id="ubahModal" tabindex="-1" role="dialog" aria-labelledby="ubahModaltitle" aria-hidden="true">
+                        <!-- Edit Modal-->
+                        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="ubahModal">Edit Data User</h5>
-                                        
+                                        <h5 class="modal-title" id="editModal">Edit User Data</h5>
                                     </div>
                                     <div class="modal-body" id="edit">
-                                        <form action="fungsi/proses_edit.php" method="post" role="form" encytype="multipart/form-data">
+                                        <form action="functions/process_edit.php" method="post" role="form" enctype="multipart/form-data">
                                             <div class="form-group row">
                                                 <label class="col-sm-4 col-form-label" for="username">Username</label>
                                                 <input type="text" class="form-control col-sm-8" name="username" id="username" placeholder="Username">
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-sm-4 col-form-label" for="nama">Nama Lengkap</label>
-                                                <input type="text" class="form-control col-sm-8" name="nama" id="nama" placeholder="Nama Lengkap">
+                                                <label class="col-sm-4 col-form-label" for="name">Full Name</label>
+                                                <input type="text" class="form-control col-sm-8" name="name" id="name" placeholder="Full Name">
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-sm-4 col-form-label" for="email">Alamat Email</label>
-                                                <input type="text" class="form-control col-sm-8" name="email" id="email" placeholder="Alamat Email" >
+                                                <label class="col-sm-4 col-form-label" for="email">Email Address</label>
+                                                <input type="text" class="form-control col-sm-8" name="email" id="email" placeholder="Email Address">
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-sm-4 col-form-label" for="no">Nomor Telepon</label>
-                                                <input type="text" class="form-control col-sm-8" name="telepon" id="no" placeholder="Nomor Telepon">
+                                                <label class="col-sm-4 col-form-label" for="phone">Phone Number</label>
+                                                <input type="text" class="form-control col-sm-8" name="phone" id="phone" placeholder="Phone Number">
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-4 col-form-label" for="level">Level</label>
-                                                <input type="text" class="form-control col-sm-8" name="level" id="level" placeholder="Level User" >
+                                                <input type="text" class="form-control col-sm-8" name="level" id="level" placeholder="User Level">
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                            <button type="submit" class="btn btn-primary" value="editAdmin" name="editAdmin">Simpan Perubahan</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary" value="editAdmin" name="editAdmin">Save Changes</button>
                                         </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
 
-                         <!-- Modal Profil -->
-                        <div class="modal fade" id="dataDiri" tabindex="-1" role="dialog" aria-labelledby="dataDiriTitle" aria-hidden="true">
+                         <!-- Profile Modal -->
+                        <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="dataDiriTitle">Halo, <?= $_SESSION['level']?> <span id="usName"><?php echo $_SESSION['nama'];?>!!</span>
+                                        <h5 class="modal-title" id="profileModalTitle">Hello, <?= $_SESSION['level']?> <span id="usName"><?php echo $_SESSION['name'];?>!!</span>
                                         </h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                     </button>
                                     </div>
-                                    <div class="modal-body  text-center">
+                                    <div class="modal-body text-center">
                                         <h6 class="text-center">
                                             <b>|</b>
-                                            <img src="../img/logo/perpus1.png" alt="" width="20px" height="27px">
-                                            <b><i class="fa fa-pencil-alt" > </i> Profil Perpustakaan |</b>
+                                            <img src="../img/logo/library1.png" alt="" width="20px" height="27px">
+                                            <b><i class="fa fa-pencil-alt"> </i> Library Profile |</b>
                                         </h6>
-                                        <h2 class="text-center"><img class="img-profile rounded-circle" src="../img/foto/<?= $_SESSION['foto'];?>" style="max-width: 175px; border: solid black 2px; "></h2>
-                                        <h5 class="text-center text-secondary font-underline font-weight-bold"><?= $_SESSION['nama'];?></h5>
-                                        <p>Username Anda : <?php echo $_SESSION['username'];?></p>
-                                        <p>Email Anda : <?php echo $_SESSION['email'];?></p>
-                                        <p>Nomor Telepon Anda : <i class="fa fa-icon fa-phone text-success"></i> <?php echo $_SESSION['telepon'];?></p>
-                                        <p>Tingkatan Level Anda : <i class="fa fa-icon fa-security text-warning"></i> <?php echo $_SESSION['level'];?></p>
+                                        <h2 class="text-center"><img class="img-profile rounded-circle" src="../img/photo/<?= $_SESSION['photo'];?>" style="max-width: 175px; border: solid black 2px; "></h2>
+                                        <h5 class="text-center text-secondary font-underline font-weight-bold"><?= $_SESSION['name'];?></h5>
+                                        <p>Your Username: <?php echo $_SESSION['username'];?></p>
+                                        <p>Your Email: <?php echo $_SESSION['email'];?></p>
+                                        <p>Your Phone Number: <i class="fa fa-icon fa-phone text-success"></i> <?php echo $_SESSION['phone'];?></p>
+                                        <p>Your Level: <i class="fa fa-icon fa-security text-warning"></i> <?php echo $_SESSION['level'];?></p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-outline-primary" data-dismiss="modal">OK!</button>
@@ -232,16 +224,16 @@ if (!isset($_SESSION['username'])) {
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabelLogout">Upss!!</h5>
+                                        <h5 class="modal-title" id="exampleModalLabelLogout">Oops!!</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                   </button>
                                     </div>
                                     <div class="modal-body">
-                                        <p>Apa kamu yakin ingin Logout, <?php echo $_SESSION['nama'];?> ?</p>
+                                        <p>Are you sure you want to logout, <?php echo $_SESSION['name'];?>?</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Batal</button>
+                                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancel</button>
                                         <a href="../logout.php" class="btn btn-primary">Logout</a>
                                     </div>
                                 </div>
@@ -278,22 +270,22 @@ if (!isset($_SESSION['username'])) {
             $('#dataTableHover').DataTable(); // ID From dataTable with Hover
         });
 
-        $(document).on("click","#tmblUbah", function() {
-                let nama=$(this).data("nama");
-                let username=$(this).data("username");
-                let password=$(this).data("password");
-                let email=$(this).data("email");
-                let notelp=$(this).data("notelp");
-                let level=$(this).data("level");
-                let foto=$(this).data("foto");
+        $(document).on("click","#editButton", function() {
+            let name=$(this).data("name");
+            let username=$(this).data("username");
+            let password=$(this).data("password");
+            let email=$(this).data("email");
+            let phone=$(this).data("phone");
+            let level=$(this).data("level");
+            let photo=$(this).data("photo");
 
-                $("#edit #nama").val(nama);
-                $("#edit #username").val(username);
-                $("#edit #password").val(password);
-                $("#edit #email").val(email);
-                $("#edit #no").val(notelp);
-                $("#edit #level").val(level);
-                $("#edit #foto").val(foto);
+            $("#edit #name").val(name);
+            $("#edit #username").val(username);
+            $("#edit #password").val(password);
+            $("#edit #email").val(email);
+            $("#edit #phone").val(phone);
+            $("#edit #level").val(level);
+            $("#edit #photo").val(photo);
             });
     </script>
 </body>
