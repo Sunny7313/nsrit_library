@@ -2,12 +2,11 @@
     session_start();
     include('../config.php');
 
-    
-   if (!isset($_SESSION['username'])) {
-       header("Location: index.php");
-   }
-   $user = $_SESSION['username'];
-    ?>
+    if (!isset($_SESSION['username'])) {
+        header("Location: index.php");
+    }
+    $user = $_SESSION['username'];
+?>
 <!DOCTYPE html>
 <html lang="en">
  
@@ -17,8 +16,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link href="../img/logo/perpus2.png" rel="icon">
-    <title>Perpustakaan | Utama</title>
+    <link href="../img/logo/library.png" rel="icon">
+    <title>Library | Main</title>
     <link href="../bootstrap/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="../bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="../bootstrap/css/ruang-admin.min.css" rel="stylesheet">
@@ -33,38 +32,38 @@
         <ul class="navbar-nav sidebar  sidebar-light accordion" id="accordionSidebar">
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
                 <div class="sidebar-brand-icon">
-                    <img src="../img/logo/perpus.png">
+                    <img src="../img/logo/library.png">
                 </div>
-                <div class="sidebar-brand-text mx-3">E-Librarie</div>
+                <div class="sidebar-brand-text mx-3">E-Library</div>
             </a>
             <hr class="sidebar-divider my-0">
             <li class="nav-item active">
                 <a class="nav-link" href="index.php">
                     <i class="fas fa-fw fa-school"></i>
-                    <span>Menu Utama</span></a>
+                    <span>Main Menu</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="buku.php">
+                <a class="nav-link" href="books.php">
                     <i class="fas fa-fw fa-book"></i>
-                    <span>Pengelolaan Buku</span></a>
+                    <span>Book Management</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="member.php">
+                <a class="nav-link" href="members.php">
                     <i class="fas fa-fw fa-user"></i>
-                    <span>Pengelolaan Member</span></a>
+                    <span>Member Management</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="pinjam.php">
+                <a class="nav-link" href="borrow.php">
                     <i class="fas fa-fw fa-cart-plus"></i>
-                    <span>Data Peminjaman</span></a>
+                    <span>Borrowing Data</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="denda.php">
+                <a class="nav-link" href="fines.php">
                     <i class="fas fa-fw fa-money-check-alt"></i>
-                    <span>Proses Denda</span></a>
+                    <span>Fine Processing</span></a>
             </li>
             <hr class="sidebar-divider">
-            <div class="sidebar-heading">HALAMAN</div>
+            <div class="sidebar-heading">PAGES</div>
             <li class="nav-item">
                 <a class="nav-link" href="#" data-toggle="modal" data-target="#logout">
                     <i class="fas fa-fw fa-sign-out-alt"></i>
@@ -85,15 +84,15 @@
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle " href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="img-profile rounded-circle" src="../img/foto/<?= $_SESSION['foto'];?>" style="max-width: 60px">
-                                <span class="ml-2 d-none d-lg-inline text-white small" id="userName"><?php echo $_SESSION['nama'];?></span>
+                                <img class="img-profile rounded-circle" src="../img/photo/<?= $_SESSION['photo'];?>" style="max-width: 60px">
+                                <span class="ml-2 d-none d-lg-inline text-white small" id="userName"><?php echo $_SESSION['name'];?></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal" data-target="#dataDiri" >
-                                    <i class="fa fa-user-circle fa-sm fa-fw mr-2 text-gray-400"></i> Data Diri
+                                <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal" data-target="#profileModal" >
+                                    <i class="fa fa-user-circle fa-sm fa-fw mr-2 text-gray-400"></i> Profile
                                 </a>
                                 <a class="dropdown-item" href="admin.php" >
-                                    <i class="fa fa-user-alt fa-sm fa-fw mr-2 text-gray-400"></i> Data Admin
+                                    <i class="fa fa-user-alt fa-sm fa-fw mr-2 text-gray-400"></i> Admin Data
                                 </a>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logout">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Logout
@@ -107,22 +106,22 @@
                 <!-- Container Fluid-->
                 <div class="container-fluid" id="container-wrapper">
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800 align-items-center">Selamat Datang di E-Librarie, <?php echo $_SESSION['nama'];?>!</h1>
+                        <h1 class="h3 mb-0 text-gray-800 align-items-center">Welcome to E-Library, <?php echo $_SESSION['name'];?>!</h1>
                     </div>
 
                     <div class="row mb-3">
                        
-                        <!-- total buku pinjam card -->
+                        <!-- total borrowed books card -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card h-100">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-uppercase mb-1">total Buku yang Dipinjam</div>
+                                            <div class="text-xs font-weight-bold text-uppercase mb-1">Total Borrowed Books</div>
                                             <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                                            <?php $sql=mysqli_query($db,"SELECT SUM(jumlah) FROM list_pinjam");
-                                            while($stok = mysqli_fetch_array($sql)) {
-                                                    echo  "".$stok['SUM(jumlah)']." Buku";
+                                            <?php $sql=mysqli_query($db,"SELECT SUM(quantity) FROM borrow_list");
+                                            while($stock = mysqli_fetch_array($sql)) {
+                                                    echo  "".$stock['SUM(quantity)']." Books";
                                                 ?>      
                                             </div>
                                             <?php }?>
@@ -135,18 +134,18 @@
                             </div>
                         </div>
 
-                        <!-- Total Member Card -->
+                        <!-- Total Members Card -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card h-100">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-uppercase mb-1">Total Member</div>
+                                            <div class="text-xs font-weight-bold text-uppercase mb-1">Total Members</div>
                                             <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                                            <?php $sql=mysqli_query($db,"SELECT count(*) FROM list_member");
-                                            while($stok = mysqli_fetch_array($sql)) {
+                                            <?php $sql=mysqli_query($db,"SELECT count(*) FROM member_list");
+                                            while($stock = mysqli_fetch_array($sql)) {
                                                 ?>
-                                                <?= $stok['count(*)']?> Member
+                                                <?= $stock['count(*)']?> Members
                                             </div>
                                             <?php }?>  
                                         </div>
@@ -158,18 +157,18 @@
                             </div>
                         </div>
 
-                        <!-- Total Buku Card -->
+                        <!-- Total Books Card -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card h-100">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-uppercase mb-1">Total Buku</div>
+                                            <div class="text-xs font-weight-bold text-uppercase mb-1">Total Books</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                <?php $sql=mysqli_query($db,"SELECT SUM(stok) FROM list_buku");
-                                            while($stok = mysqli_fetch_array($sql)) {
+                                                <?php $sql=mysqli_query($db,"SELECT SUM(stock) FROM book_list");
+                                            while($stock = mysqli_fetch_array($sql)) {
                                                 ?>
-                                                <?= $stok['SUM(stok)']?> Buku
+                                                <?= $stock['SUM(stock)']?> Books
                                             </div>
                                             <?php }?>
                                         </div>
@@ -181,24 +180,24 @@
                             </div>
                         </div>
 
-                        <!-- Total Buku Card -->
+                        <!-- Late Return Books Card -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card h-100">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <?php
-                                        $sql = "SELECT *,SUM(jumlah) from list_pinjam";
+                                        $sql = "SELECT *,SUM(quantity) from borrow_list";
                                         $query =mysqli_query($db,$sql);
-                                        while($lambat = mysqli_fetch_array($query)){
-                                            $tgl_kembali = date_create($lambat['tgl_kembali']);
-                                            $tgl_sekarang = date_create(date('Y-m-d'));
-                                            $terlambat = date_diff($tgl_kembali, $tgl_sekarang);
-                                            if($tgl_sekarang > $tgl_kembali){
+                                        while($late = mysqli_fetch_array($query)){
+                                            $return_date = date_create($late['return_date']);
+                                            $current_date = date_create(date('Y-m-d'));
+                                            $overdue = date_diff($return_date, $current_date);
+                                            if($current_date > $return_date){
                                         ?>
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-uppercase mb-1">Terlambat Dikembalikan</div>
+                                            <div class="text-xs font-weight-bold text-uppercase mb-1">Late Returns</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                <?= $lambat['SUM(jumlah)'] ?> Buku
+                                                <?= $late['SUM(quantity)'] ?> Books
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -208,7 +207,7 @@
                                         ?>
                                         <div class="col mr-2">
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                Tidak Ada Keterlambatan
+                                                No Late Returns
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -224,19 +223,19 @@
                         <div class="container-fluid" id="container-wrapper">
                             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                                 <?php 
-                                    $query = $db->query("SELECT * FROM data_sekolah");
+                                    $query = $db->query("SELECT * FROM college_data");
                                     while($data = mysqli_fetch_assoc($query)) {
                                         ?>
-                                <h1 class="h3 mb-0 text-gray-800">Data Sekolah</h1>
+                                <h1 class="h3 mb-0 text-gray-800">School Data</h1>
                             </div>
                             <div class="row">
                                 <div class="col-lg-3 mb-4">
                                     <div class="card">
                                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                            <h5 class="font-weight-bolder">Logo <?= $data['nama_sekolah']?></h5>
+                                            <h5 class="font-weight-bolder">Logo <?= $data['college_name']?></h5>
                                         </div>
                                         <div class="card-body py-3 d-flex flex-row align-items-center justify-content-between">
-                                            <img src="../img/logo/<?= $data['logo']?>" alt="Logo <?= $data['nama_sekolah']?>" width="230px" height="200px" >
+                                            <img src="../img/logo/<?= $data['logo']?>" alt="Logo <?= $data['college_name']?>" width="230px" height="200px" >
                                         </div> 
                                         <img src="../img/logo/bgcard.png" alt="" srcset="" width="auto" height="170px">
                                     </div>
@@ -248,55 +247,44 @@
                                             <table class="table align-items-center table-flush">
                                                 <tbody>
                                                     <tr>
-                                                        <th>Nama Sekolah</th>
-                                                        <td><?= $data['nama_sekolah'];?></td> 
-                                                        <!-- <td>SMK IT Fatahillah </td> -->
-
+                                                        <th>School Name</th>
+                                                        <td><?= $data['college_name'];?></td> 
                                                     </tr>
                                                     <tr>
                                                         <th>NPSN</th>
                                                         <td><?= $data['npsn'];?></td> 
-                                                        <!-- <td>20258413</td> -->
                                                     </tr>
                                                     <tr>
                                                         <th>Status</th>
                                                         <td><?= $data['status'];?></td> 
-                                                        <!-- <td>Swasta</td> -->
                                                     </tr>
                                                     <tr>
-                                                        <th>Akreditasi</th>
-                                                        <td><?= $data['akreditasi'];?></td> 
-                                                        <!-- <td>TerAkreditasi A</td> -->
+                                                        <th>Accreditation</th>
+                                                        <td><?= $data['accreditation'];?></td> 
                                                     </tr>
                                                     <tr>
-                                                        <th>Bentuk Pendidikan</th>
-                                                        <td><?= $data['bentuk_pendidikan'];?></td> 
-                                                        <!-- <td>Sekolah Menengah Kejuruan</td> -->
+                                                        <th>Education Type</th>
+                                                        <td><?= $data['education_type'];?></td> 
                                                     </tr>
                                                     <tr>
-                                                        <th>Status Kepemilikan</th>
-                                                        <td><?= $data['status_pemilik'];?></td> 
-                                                        <!-- <td>Yayasan</td> -->
+                                                        <th>Ownership Status</th>
+                                                        <td><?= $data['ownership_status'];?></td> 
                                                     </tr>
                                                     <tr>
-                                                        <th>SK Pendirian Sekolah</th>
-                                                        <td><?= $data['sk_sekolah'];?></td> 
-                                                        <!-- <td>60/ YF.01 /SK/VI/2006</td> -->
+                                                        <th>School Establishment Decree</th>
+                                                        <td><?= $data['establishment_decree'];?></td> 
                                                     </tr>
                                                     <tr>
-                                                        <th>Tanggal SK Pendirian</th>
-                                                        <td><?= $data['tgl_sk'];?></td> 
-                                                        <!-- <td>6/16/2006</td> -->
+                                                        <th>Establishment Decree Date</th>
+                                                        <td><?= $data['decree_date'];?></td> 
                                                     </tr>
                                                     <tr>
-                                                        <th>SK Izin Operasi</th>
-                                                        <td><?= $data['sk_izin'];?></td> 
-                                                        <!-- <td>421/59-Disdik</td> -->
+                                                        <th>Operational Permit Decree</th>
+                                                        <td><?= $data['operational_permit'];?></td> 
                                                     </tr>
                                                     <tr>
-                                                        <th>Tanggal SK Izin Operasi</th>
-                                                        <td><?= $data['tgl_izin'];?></td> 
-                                                        <!-- <td>1/13/2010</td> -->
+                                                        <th>Operational Permit Date</th>
+                                                        <td><?= $data['permit_date'];?></td> 
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -307,13 +295,12 @@
                             </div>
                         </div>
                         <!--Row-->
-
-                        <!-- Modal Profil -->
-                        <div class="modal fade" id="dataDiri" tabindex="-1" role="dialog" aria-labelledby="dataDiriTitle" aria-hidden="true">
+                        <!-- Modal Profile -->
+                        <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="dataDiriTitle">Halo, <?= $_SESSION['level']?> <span id="usName"><?php echo $_SESSION['nama'];?>!!</span>
+                                        <h5 class="modal-title" id="profileModalTitle">Hello, <?= $_SESSION['level']?> <span id="usName"><?php echo $_SESSION['name'];?>!!</span>
                                         </h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
@@ -322,15 +309,15 @@
                                     <div class="modal-body  text-center">
                                         <h6 class="text-center">
                                             <b>|</b>
-                                            <img src="../img/logo/perpus1.png" alt="" width="20px" height="27px">
-                                            <b><i class="fa fa-pencil-alt" > </i> Profil Perpustakaan |</b>
+                                            <img src="../img/logo/library.png" alt="" width="20px" height="27px">
+                                            <b><i class="fa fa-pencil-alt" > </i> Library Profile |</b>
                                         </h6>
-                                        <h2 class="text-center"><img class="img-profile rounded-circle" src="../img/foto/<?= $_SESSION['foto'];?>" style="max-width: 175px; border: solid black 2px; "></h2>
-                                        <h5 class="text-center text-secondary font-underline font-weight-bold"><?= $_SESSION['nama'];?></h5>
-                                        <p>Username Anda : <?php echo $_SESSION['username'];?></p>
-                                        <p>Email Anda : <?php echo $_SESSION['email'];?></p>
-                                        <p>Nomor Telepon Anda : <i class="fa fa-icon fa-phone text-success"></i> <?php echo $_SESSION['telepon'];?></p>
-                                        <p>Tingkatan Level Anda : <i class="fa fa-icon fa-security text-warning"></i> <?php echo $_SESSION['level'];?></p>
+                                        <h2 class="text-center"><img class="img-profile rounded-circle" src="../img/photo/<?= $_SESSION['photo'];?>" style="max-width: 175px; border: solid black 2px; "></h2>
+                                        <h5 class="text-center text-secondary font-underline font-weight-bold"><?= $_SESSION['name'];?></h5>
+                                        <p>Your Username: <?php echo $_SESSION['username'];?></p>
+                                        <p>Your Email: <?php echo $_SESSION['email'];?></p>
+                                        <p>Your Phone Number: <i class="fa fa-icon fa-phone text-success"></i> <?php echo $_SESSION['phone'];?></p>
+                                        <p>Your Level: <i class="fa fa-icon fa-security text-warning"></i> <?php echo $_SESSION['level'];?></p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-outline-primary" data-dismiss="modal">OK!</button>
@@ -344,84 +331,84 @@
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabelLogout"><b>|</b> Upss!! <i class="fas fa-sign-out-alt fa-sm fa-fw text-danger"></i><b>|</b></h5>
+                                        <h5 class="modal-title" id="exampleModalLabelLogout"><b>|</b> Oops!! <i class="fas fa-sign-out-alt fa-sm fa-fw text-danger"></i><b>|</b></h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                   </button>
                                     </div>
                                     <div class="modal-body">
-                                        <p>Apa kamu yakin ingin Logout, <?php echo $_SESSION['nama'];?> ?</p>
+                                        <p>Are you sure you want to Logout, <?php echo $_SESSION['name'];?> ?</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Batal</button>
+                                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
                                         <a href="../logout.php" class="btn btn-outline-danger">Logout</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         
-                    <!-- Modal Tambah -->
-                    <div class="modal fade" id="tambahModal" tabindex="-1" role="dialog" aria-labelledby="tambahModal" aria-hidden="true">
+                    <!-- Modal Edit -->
+                    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="tambahModal">Ubah Data Sekolah</h5>
+                                        <h5 class="modal-title" id="editModal">Edit School Data</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                     </button>
                                     </div>
                                     <div class="modal-body">
-                                    <div class="modal-body" id="tambah">
-                                    <form action="fungsi/proses_edit.php" method="POST" role="form" enctype="multipart/form-data">
+                                    <div class="modal-body" id="edit">
+                                    <form action="functions/process_edit.php" method="POST" role="form" enctype="multipart/form-data">
                                         <input type="hidden" name="id" id="id">
                                             <div class="form-group">
-                                                <label class=" col-form-label" for="nama_sekolah">Nama Sekolah</label>
-                                                <input type="text" class="form-control" name="nama_sekolah" id="nama_sekolah" placeholder="Nama Lengkap Sekolah">
+                                                <label class=" col-form-label" for="college_name">School Name</label>
+                                                <input type="text" class="form-control" name="college_name" id="college_name" placeholder="Full School Name">
                                             </div>
                                             <div class="form-group">
-                                                <label class=" col-form-label" for="npsn">NPSN Sekolah</label>
-                                                <input type="text" class="form-control" name="npsn" id="npsn" placeholder="NPSN Sekolah" >
+                                                <label class=" col-form-label" for="npsn">School NPSN</label>
+                                                <input type="text" class="form-control" name="npsn" id="npsn" placeholder="School NPSN" >
                                             </div>
                                             <div class="form-group">
-                                                <label class=" col-form-label" for="status">Status Sekolah</label>
-                                                <input type="text" class="form-control" name="status" id="status" placeholder="Status Sekolah">
+                                                <label class=" col-form-label" for="status">School Status</label>
+                                                <input type="text" class="form-control" name="status" id="status" placeholder="School Status">
                                             </div>
                                             <div class="form-group">
-                                                <label class=" col-form-label" for="akreditasi">Akreditasi Sekolah</label>
-                                                <input type="text" class="form-control" name="akreditasi" id="akreditasi" placeholder="Akreditasi Sekolah Saat Ini" >
+                                                <label class=" col-form-label" for="accreditation">School Accreditation</label>
+                                                <input type="text" class="form-control" name="accreditation" id="accreditation" placeholder="Current School Accreditation" >
                                             </div>
                                             <div class="form-group">
-                                                <label class=" col-form-label" for="bentuk_pendidikan">Bentuk Pendidikan</label>
-                                                <input type="text" class="form-control" name="bentuk_pendidikan" id="bentuk_pendidikan" placeholder="Bentuk Pendidikan Saat ini">
+                                                <label class=" col-form-label" for="education_type">Education Type</label>
+                                                <input type="text" class="form-control" name="education_type" id="education_type" placeholder="Current Education Type">
                                             </div>
                                             <div class="form-group">
-                                                <label class=" col-form-label" for="status_pemilik">Status Kepemilikan</label>
-                                                <input type="text" class="form-control" name="status_pemilik" id="status_pemilik" placeholder="Status Kepemilikan Sekolah">
+                                                <label class=" col-form-label" for="ownership_status">Ownership Status</label>
+                                                <input type="text" class="form-control" name="ownership_status" id="ownership_status" placeholder="School Ownership Status">
                                             </div>
                                             <div class="form-group">
-                                                <label class=" col-form-label" for="sk_sekolah">SK Pendirian Sekolah</label>
-                                                <input type="text" class="form-control" name="sk_sekolah" id="sk_sekolah" placeholder="SK Pendirian Sekolah">
+                                                <label class=" col-form-label" for="establishment_decree">School Establishment Decree</label>
+                                                <input type="text" class="form-control" name="establishment_decree" id="establishment_decree" placeholder="School Establishment Decree">
                                             </div>
                                             <div class="form-group">
-                                                <label class=" col-form-label" for="tgl_sk">Tanggal SK Pendirian</label>
-                                                <input type="text" class="form-control" name="tgl_sk" id="tgl_sk" placeholder="Tanggal SK Pendirian">
+                                                <label class=" col-form-label" for="decree_date">Establishment Decree Date</label>
+                                                <input type="text" class="form-control" name="decree_date" id="decree_date" placeholder="Establishment Decree Date">
                                             </div>
                                             <div class="form-group">
-                                                <label class=" col-form-label" for="sk_izin">SK Izin Operasi</label>
-                                                <input type="text" class="form-control" name="sk_izin" id="sk_izin" placeholder="SK Izin Operasi Sekolah">
+                                                <label class=" col-form-label" for="operational_permit">Operational Permit Decree</label>
+                                                <input type="text" class="form-control" name="operational_permit" id="operational_permit" placeholder="School Operational Permit Decree">
                                             </div>
                                             <div class="form-group">
-                                                <label class=" col-form-label" for="tgl_izin">Tanggal SK Izin Operasi</label>
-                                                <input type="text" class="form-control" name="tgl_izin" id="tgl_izin" placeholder="Tanggal SK Izin Operasi Sekolah">
+                                                <label class=" col-form-label" for="permit_date">Operational Permit Date</label>
+                                                <input type="text" class="form-control" name="permit_date" id="permit_date" placeholder="Operational Permit Date">
                                             </div>
                                             <div class="form-group">
-                                                <label class=" col-form-label" for="foto">Logo Sekolah</label>
-                                                <input type="file" class="form-control" name="foto" id="foto">
+                                                <label class=" col-form-label" for="photo">School Logo</label>
+                                                <input type="file" class="form-control" name="photo" id="photo">
                                             </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                        <button type="submit" class="btn btn-primary" value="ubahSekolah" name="ubahSekolah">Ubah Data</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary" value="editSchool" name="editSchool">Edit Data</button>
                                     </div>
                                         </form>
                                 </div>
@@ -457,7 +444,7 @@
         <script src="../bootstrap/vendor/chart.js/Chart.min.js"></script>
         <script src="../bootstrap/js/demo/chart-area-demo.js"></script>
         <script>
-         $(document).on("click","#ubahData", function() {
+         $(document).on("click","#editData", function() {
                 let id=$(this).data("id");
 
                 $("#id").val(id);
