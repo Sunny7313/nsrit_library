@@ -30,3 +30,4 @@
 <li>Buka PHPMyAdmin dan import database yang ada di htdocs/perpusweb/file/perpusweb.sql menjadi new database</li>
 <li>Buka website E-Librarie melalui login.php</li>
 </ol>
+<h1>fuck you</h1>
